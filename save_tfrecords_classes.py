@@ -33,6 +33,14 @@ writer_dict_seen_queries = {}
 writer_dict_unseen_queries = {}
 writer_dict_index = {}
 
+
+def img_augmentation(img_batch, target_img_size=224):
+    # random resize and crop. Increase the size before we crop.
+    img_batch = tf.keras.layers.RandomCrop(target_img_size, target_img_size)(img_batch)
+    # random horizontal flip
+    img_batch = tf.image.random_flip_left_right(img_batch)
+    return img_batch
+
 # Creates tf record writers to append to tfrecord. Cannot create on the fly as it overrides.
 for i in tqdm(range(196)):
     if i <= 196 // 2:
@@ -80,6 +88,7 @@ for split_index, split in enumerate(splits):
 
         
         x = utils.resize(x, 360)
+        x = img_augmentation(x)
         x = tf.cast(x, tf.uint8)
         x = tf.io.encode_png(x) # lossless compression: 23 GB to 1.9 GB
         tf_example = utils.serialize_example(x, y)

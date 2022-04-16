@@ -85,7 +85,7 @@ def run(config):
     model.calibrate(x_query, y_query, calibration_metric="f1",
         matcher="match_nearest",
         extra_metrics=["precision", "recall", "binary_accuracy"],
-        verbose=1,)
+        verbose=1)
     
     num_neighbors = 5
     num_samples = 4

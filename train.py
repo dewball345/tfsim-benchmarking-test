@@ -44,7 +44,7 @@ class BenchmarkTrainer:
 
         # building model
         self.model = tfsim.architectures.EfficientNetSim(
-            [360, 360, 3],
+            [224, 224, 3],
             embedding_size,
             variant="B0", 
             pooling="gem",    # Can change to use `gem` -> GeneralizedMeanPooling2D
