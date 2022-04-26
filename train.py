@@ -48,8 +48,8 @@ class BenchmarkTrainer:
             embedding_size,
             variant="B0", 
             pooling="gem",    # Can change to use `gem` -> GeneralizedMeanPooling2D
-            gem_p=3.0,        # Increase the contrast between activations in the feature map.
-            trainable="partial",
+            # gem_p=3.0,        # Increase the contrast between activations in the feature map.
+            trainable="full",
         )  
 
     def build_loss(self):  
